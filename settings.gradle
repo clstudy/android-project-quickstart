@@ -1,0 +1,2 @@
+include ':app', ':network', ':framework'
+rootProject.name='Architecture'

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <com.jacky.option.architecture.mvp.ui.view.ChrysanthemumLoadingView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:pathColor="#f00"
+        app:segmentLength="7dp"
+        app:segmentWidth="3dp" />
+
+</LinearLayout>

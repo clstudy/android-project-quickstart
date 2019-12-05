@@ -8,12 +8,18 @@ package com.jacky.option.net.callback;
 public class SimpleHttpCallBack<D> extends IAHttpCallBack<D, String> {
 
     @Override
-    public void onSuccess(D data) {
+    public void onBizSuccess(D data) {
 
     }
 
     @Override
-    public void onError(String error) {
+    public void onBizError(String error) {
 
     }
+
+    @Override
+    public void onNetWorkError(String netErr) {
+
+    }
+
 }

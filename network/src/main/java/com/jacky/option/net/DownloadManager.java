@@ -31,7 +31,6 @@ import okhttp3.Response;
  * banker developer. <br/>
  * <br/>
  */
-
 public class DownloadManager {
 
     private final String TAG = "DownloadManager";
@@ -65,15 +64,28 @@ public class DownloadManager {
         return mSaveFilesNames.get(url);
     }
 
-    public void deleteDownloadFile(String url) {
+
+    /**
+     * 删除下载文件
+     *
+     * @param url 下载链接
+     * @return 删除成功
+     */
+    public boolean deleteDownloadFile(String url) {
         String downloadPath = getDownloadPath(url);
-        if (downloadPath == null) return;
+        if (downloadPath == null) return false;
         File file = new File(downloadPath);
-        if (!file.exists()) return;
-        boolean delete = file.delete();
-//        LogUtils.d(TAG, "deleteDownloadFile=" + delete);
+        if (!file.exists()) return false;
+        return file.delete();
     }
 
+    /**
+     * 下载
+     *
+     * @param url              下载链接
+     * @param savePath         保存路径
+     * @param downLoadObserver 监听
+     */
     public void download(final String url, final File savePath, Subscriber<DownloadInfo> downLoadObserver) {
         if (savePath == null || !savePath.exists()) return;
         Flowable.just(url)
@@ -109,6 +121,11 @@ public class DownloadManager {
                 .subscribe(downLoadObserver);//添加观察者
     }
 
+    /**
+     * 取消下载
+     *
+     * @param url 下载链接
+     */
     public void cancel(String url) {
         Call call = mDownCalls.get(url);
         if (call != null) {
@@ -116,7 +133,6 @@ public class DownloadManager {
         }
         mDownCalls.remove(url);
     }
-
 
     private DownloadInfo createDownInfo(String url, File savePath) {
         DownloadInfo downloadInfo = new DownloadInfo(url, savePath);

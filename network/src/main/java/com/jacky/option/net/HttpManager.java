@@ -13,7 +13,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * banker developer. <br/>
  * <br/>
  */
-
 public class HttpManager {
 
     private static HttpManager instance;
@@ -35,36 +34,56 @@ public class HttpManager {
     }
 
     /**
-     * 多次设置，只有第一次设置才有效
+     * HttpManager初始化，在{@link HttpManager#getServiceProvider()}
+     * 或{@link HttpManager#getDiyServiceProvider(OkHttpClient)}
+     * 被调用之前才有效，建议放在{@link android.app.Application}里调用
      *
-     * @param debug            可调试
-     * @param cacheInterceptor 全局缓存拦截器
+     * @param debug 可调试
+     * @return HttpManager
+     */
+    public HttpManager init(boolean debug, IOKHtttpClientProvider okHttpClientProvider) {
+        OkHttpClientHolder.INSTANCE.isDebug(debug);
+        if (okHttpClientProvider != null) {
+            OkHttpClientHolder.INSTANCE.setProvider(okHttpClientProvider);
+        }
+        return instance;
+    }
+
+    /**
+     * 设置url前缀,可多次调用。要在service调用http方法之前有用，service调用之后会把值清掉。
+     * 此方法未调用，会先查找service的成员变量名为"BASE_URL"的成员变量作url前缀。
+     *
+     * @param baseUrl url前缀
      * @return
      */
-    public HttpManager init(boolean debug, Interceptor cacheInterceptor) {
-        OkHttpClientHolder.INSTANCE.isDebug(debug);
-        OkHttpClientHolder.INSTANCE.addNetworkInterceptor(cacheInterceptor);
-        return instance;
-    }
-
-    public HttpManager addInterceptors(Interceptor... interceptor) {
-        OkHttpClientHolder.INSTANCE.addInterceptors(interceptor);
-        return instance;
-    }
-
     public HttpManager setUrl(String baseUrl) {
         mBuilder.addUrl(baseUrl);
         return instance;
     }
 
+    /**
+     * 使用默认的ServiceProvider，引用的okhttpclient跟{@link HttpManager#init(boolean, IOKHtttpClientProvider)}
+     * 的设置有关。
+     *
+     * @return
+     */
     public ServiceProvider getServiceProvider() {
         return mBuilder.build(OkHttpClientHolder.INSTANCE.httpclient());
     }
 
+    /**
+     * 使用自定义的ServiceProvider，{@link HttpManager#init(boolean, IOKHtttpClientProvider)}设置对其无效
+     *
+     * @param client
+     * @return
+     */
     public ServiceProvider getDiyServiceProvider(OkHttpClient client) {
         return mBuilder.build(client);
     }
 
+    /**
+     * 缓存全局单例OkHttpClient
+     */
     private static class OkHttpClientHolder {
         private static OkHttpClientHolder INSTANCE = new OkHttpClientHolder();
 
@@ -73,30 +92,39 @@ public class HttpManager {
         private boolean isDebug;
 
         private OkHttpClientHolder() {
-            mProvider = new OkHttpProvider();
         }
 
+        public void setProvider(IOKHtttpClientProvider provider) {
+            mProvider = provider;
+        }
+
+        /**
+         * 调试打开log输出
+         *
+         * @param debug 调试
+         */
         private void isDebug(boolean debug) {
             this.isDebug = debug;
         }
 
-        public void addInterceptors(Interceptor... customInterceptors) {
-            mProvider.addInterceptors(customInterceptors);
-        }
-
-        public void addNetworkInterceptor(Interceptor networkInterceptor) {
-            mProvider.addNetworkInterceptor(networkInterceptor);
-        }
-
+        /**
+         * 全局单例OkHttpClient
+         *
+         * @return OkHttpClient
+         */
         private OkHttpClient httpclient() {
             if (mGlobalOkHttpClient != null)
                 return mGlobalOkHttpClient;
 
-            if (isDebug) {
+            if (mProvider == null)
+                mProvider = new OkHttpProvider();
+
+            if (isDebug && mProvider.providerInterceptorList() != null && !mProvider.providerInterceptorList().isEmpty()) {
                 HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
                         .setLevel(HttpLoggingInterceptor.Level.BODY);
-                mProvider.addInterceptorToLast(httpLoggingInterceptor);
+                mProvider.providerInterceptorList().addLast(httpLoggingInterceptor);
             }
+
             mGlobalOkHttpClient = mProvider.providerOkHttpClient();
             return mGlobalOkHttpClient;
         }

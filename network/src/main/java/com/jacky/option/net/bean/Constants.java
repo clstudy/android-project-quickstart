@@ -5,7 +5,6 @@ package com.jacky.option.net.bean;
  * banker developer. <br/>
  * <br/>
  */
-
 public interface Constants {
     String SERVER_ERROR = "服务器出错了";
     String CONNOT_CONNECT_SERVER_PLEASE_CHECKNET = "无法连接服务器，请检查网络状态";

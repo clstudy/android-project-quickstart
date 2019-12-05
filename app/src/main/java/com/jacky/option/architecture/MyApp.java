@@ -7,6 +7,7 @@ import com.jacky.option.architecture.net.interceptor.AddParamInterceptor;
 import com.jacky.option.framework.FrameworkInit;
 import com.jacky.option.net.HttpManager;
 import com.jacky.option.net.interceptor.CacheControlInterceptor;
+import com.jacky.option.net.provider.OkHttpProvider;
 
 /**
  * <pre>
@@ -22,8 +23,10 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         HttpManager.getInstance()
-                .init(true, new CacheControlInterceptor())
-                .addInterceptors(new AddParamInterceptor());
+                .init(true, new OkHttpProvider()
+                        .setTimeout(6, 6, 6)
+                        .addInterceptors(new AddParamInterceptor())
+                        .addNetworkInterceptor(new CacheControlInterceptor()));
         NetworkInit.init(this);
         FrameworkInit.init(this);
     }

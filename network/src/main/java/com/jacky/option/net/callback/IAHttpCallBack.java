@@ -5,7 +5,6 @@ package com.jacky.option.net.callback;
  * banker developer. <br/>
  * <br/>
  */
-
 public abstract class IAHttpCallBack<D, E> implements IHttpCallBack<D, E> {
     @Override
     public void onComplete() {

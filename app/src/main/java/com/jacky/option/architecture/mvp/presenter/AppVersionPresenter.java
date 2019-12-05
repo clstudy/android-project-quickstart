@@ -24,8 +24,19 @@ public class AppVersionPresenter extends BasePresenter<AppVersionContract.View> 
         DataModel testModel = new DataModel(mRootView);
         testModel.getVersion(reqVersion, new SimpleHttpCallBack<RespData<RespVersion>>() {
             @Override
-            public void onSuccess(RespData<RespVersion> data) {
+            public void onBizError(String error) {
+
+            }
+
+            @Override
+            public void onBizSuccess(RespData<RespVersion> data) {
                 mRootView.onGetVersion(data.getRecords());
+            }
+
+            @Override
+            public void onNetWorkError(String netErr) {
+
+
             }
         });
     }

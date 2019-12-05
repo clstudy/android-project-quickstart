@@ -1,7 +1,6 @@
 package com.jacky.option.net.provider;
 
 import com.jacky.option.NetworkInit;
-import com.jacky.option.net.interceptor.CacheControlInterceptor;
 
 import java.io.File;
 import java.util.Collections;
@@ -18,20 +17,42 @@ import okhttp3.OkHttpClient;
  * banker developer. <br/>
  * <br/>
  */
-
 public class OkHttpProvider implements IOKHtttpClientProvider {
     private static final String TAG = "OkHttpProvider";
+
     private final static long DEFAULT_TIMEOUT_CONN = 10;
     private final static long DEFAULT_TIMEOUT_IO = 10;
 
-    OkHttpClient.Builder mHttpClientBuilder;
-    LinkedList<Interceptor> mInterceptorList;
-    Interceptor mNetworkInterceptor;
-
+    private LinkedList<Interceptor> mInterceptorList;
+    private Interceptor mNetworkInterceptor;
+    private long mTimeoutConn;
+    private long mTimeoutWrite;
+    private long mTimeoutRead;
 
     public OkHttpProvider() {
         mInterceptorList = new LinkedList<>();
-        mHttpClientBuilder = new OkHttpClient.Builder();
+    }
+
+    public OkHttpProvider setTimeout(long conn, long write, long read) {
+        this.mTimeoutConn = conn;
+        this.mTimeoutWrite = write;
+        this.mTimeoutRead = read;
+        return this;
+    }
+
+    public OkHttpProvider addInterceptors(Interceptor... customInterceptors) {
+        Collections.addAll(mInterceptorList, customInterceptors);
+        return this;
+    }
+
+    public OkHttpProvider addNetworkInterceptor(Interceptor networkInterceptor) {
+        this.mNetworkInterceptor = networkInterceptor;
+        return this;
+    }
+
+    @Override
+    public LinkedList<Interceptor> providerInterceptorList() {
+        return mInterceptorList;
     }
 
     /**
@@ -47,48 +68,31 @@ public class OkHttpProvider implements IOKHtttpClientProvider {
      * ● 只观察在网络上传输的数据.
      * ● 携带请求来访问连接.
      */
-
-    public OkHttpProvider addInterceptors(Interceptor... customInterceptors) {
-        Collections.addAll(mInterceptorList, customInterceptors);
-        return this;
-    }
-
-    public OkHttpProvider addInterceptorToLast(Interceptor customInterceptors) {
-        mInterceptorList.addLast(customInterceptors);
-        return this;
-    }
-
-    public OkHttpProvider addNetworkInterceptor(Interceptor networkInterceptor) {
-        this.mNetworkInterceptor = networkInterceptor;
-        return this;
-    }
-
     @Override
     public OkHttpClient providerOkHttpClient() {
         //设置超时时间
-        mHttpClientBuilder.connectTimeout(DEFAULT_TIMEOUT_CONN, TimeUnit.SECONDS);
-        mHttpClientBuilder.writeTimeout(DEFAULT_TIMEOUT_IO, TimeUnit.SECONDS);
-        mHttpClientBuilder.readTimeout(DEFAULT_TIMEOUT_IO, TimeUnit.SECONDS);
+        OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+
+        long conn = mTimeoutConn == 0 ? DEFAULT_TIMEOUT_CONN : mTimeoutConn;
+        long write = mTimeoutWrite == 0 ? DEFAULT_TIMEOUT_IO : mTimeoutWrite;
+        long read = mTimeoutRead == 0 ? DEFAULT_TIMEOUT_IO : mTimeoutRead;
+        httpClientBuilder.connectTimeout(conn, TimeUnit.SECONDS);
+        httpClientBuilder.writeTimeout(write, TimeUnit.SECONDS);
+        httpClientBuilder.readTimeout(read, TimeUnit.SECONDS);
 
         //设置缓存
         File httpCacheDirectory = new File(NetworkInit.getContext().getCacheDir(), "OkHttpCache");
-        mHttpClientBuilder.cache(new Cache(httpCacheDirectory, 100 * 1024 * 1024));
+        httpClientBuilder.cache(new Cache(httpCacheDirectory, 100 * 1024 * 1024));
         // 自定义拦截器
         for (Interceptor interceptor : mInterceptorList) {
-            mHttpClientBuilder.addInterceptor(interceptor);
+            httpClientBuilder.addInterceptor(interceptor);
         }
         //设置缓存拦截器
         if (mNetworkInterceptor != null) {
-            mHttpClientBuilder.addNetworkInterceptor(mNetworkInterceptor);
+            httpClientBuilder.addNetworkInterceptor(mNetworkInterceptor);
         }
-        return mHttpClientBuilder.build();
+        return httpClientBuilder.build();
     }
 
-    /**
-     * @return 有缓存的OkHttpClient
-     */
-    public OkHttpClient getDefaultOkHttpClient() {
-        return addNetworkInterceptor(new CacheControlInterceptor()).providerOkHttpClient();
-    }
 
 }

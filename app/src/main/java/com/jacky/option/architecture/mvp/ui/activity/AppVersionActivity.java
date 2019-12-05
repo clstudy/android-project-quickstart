@@ -10,6 +10,7 @@ import com.jacky.option.architecture.net.dto.req.ReqVersion;
 import com.jacky.option.architecture.net.dto.resp.RespVersion;
 import com.jacky.option.architecture.mvp.contract.AppVersionContract;
 import com.jacky.option.architecture.mvp.presenter.AppVersionPresenter;
+import com.jacky.option.framework.utils.UIUtils;
 
 import java.util.List;
 
@@ -47,6 +48,6 @@ public class AppVersionActivity extends BaseSupportActivity<AppVersionPresenter>
 
     @Override
     public void onGetVersion(List<RespVersion> result) {
-
+        UIUtils.showShortToast("result:" + result.get(0).getName());
     }
 }

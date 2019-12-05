@@ -13,10 +13,10 @@ public class MyHttpResultObserver<D> extends IAHttpResultObserver<Resp<D>, D, St
     @Override
     protected void _onHttpSuccess(Resp<D> response) {
         if (response == null) {
-            mHttpCallBack.onError("暂无数据");
+            mHttpCallBack.onBizError("暂无数据");
             return;
         }
-        mHttpCallBack.onSuccess(response.getData());
+        mHttpCallBack.onBizSuccess(response.getData());
 //        if (response.getCode().equals("200")) {
 //            mHttpCallBack.onSuccess(response.getData());
 //        } else if (response.getCode().equals("301")) {//token失效
@@ -27,11 +27,5 @@ public class MyHttpResultObserver<D> extends IAHttpResultObserver<Resp<D>, D, St
 //            mHttpCallBack.onError(response.getText());
 //        }
     }
-
-    @Override
-    protected void _onHttpError(String httpError) {
-        mHttpCallBack.onError(httpError);
-    }
-
 
 }

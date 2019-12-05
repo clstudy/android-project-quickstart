@@ -20,13 +20,7 @@ public class SimpleHttpResultObserver<T> extends IAHttpResultObserver<T, T, Stri
 
     protected void _onHttpSuccess(T response) {
         if (mHttpCallBack != null) {
-            mHttpCallBack.onSuccess(response);
-        }
-    }
-
-    protected void _onHttpError(String httpError) {
-        if (mHttpCallBack != null) {
-            mHttpCallBack.onError(httpError);
+            mHttpCallBack.onBizSuccess(response);
         }
     }
 

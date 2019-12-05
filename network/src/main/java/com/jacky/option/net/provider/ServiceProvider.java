@@ -29,10 +29,23 @@ public class ServiceProvider {
     private ServiceProvider() {
     }
 
+    /**
+     * 调用Retrofit创建一个执行http请求的service
+     *
+     * @param serviceClass HTTP request service calss
+     * @param <S>          HTTP request service
+     * @return HTTP request service 代理对象
+     */
     public <S> S createService(Class<S> serviceClass) {
         return createService(serviceClass, null);
     }
 
+    /**
+     * @param serviceClass HTTP request service calss
+     * @param factory      HTTP response data Converter
+     * @param <S>          HTTP request service
+     * @return HTTP request service 代理对象
+     */
     public <S> S createService(Class<S> serviceClass, @Nullable Converter.Factory factory) {
         if (TextUtils.isEmpty(mBaseUrl)) {
             try {

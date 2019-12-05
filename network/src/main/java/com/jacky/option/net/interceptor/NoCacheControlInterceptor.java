@@ -12,7 +12,6 @@ import okhttp3.Response;
  * banker developer. <br/>
  * <br/>
  */
-
 public class NoCacheControlInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {

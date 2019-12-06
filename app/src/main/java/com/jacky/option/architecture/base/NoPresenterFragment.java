@@ -10,6 +10,10 @@ import com.jacky.option.framework.mvp.BasePresenter;
  *     version: 1.0
  *     desc   : 不依赖Presenter的Fragment
  * </pre>
+ *
+ * <p>
+ * 成员变量mPresenter 为null,不要使用该变量
+ * </p>
  */
 public class NoPresenterFragment extends BaseSupportFragment<BasePresenter> {
     @Override

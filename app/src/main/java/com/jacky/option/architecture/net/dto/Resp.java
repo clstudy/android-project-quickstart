@@ -1,5 +1,7 @@
 package com.jacky.option.architecture.net.dto;
 
+import java.util.List;
+
 /**
  * <pre>
  *     author : jacks
@@ -11,34 +13,26 @@ package com.jacky.option.architecture.net.dto;
  */
 public class Resp<T> {
 
+
     /**
-     * code : 0
-     * data : {"queryPage":1,"querySize":20,"queryType":"QUERY_RESET","records":[{"apk":"xxty_beta_1.3.4_Build20191203_1102.apk","apkUrl":"/upload/20191203/29fb36accd9d42234f2ec253a99c510d.3.7_build20191203_1049_fortest.apk","count":283,"createTime":1572283145000,"deleted":false,"id":5,"imgLogo":"/upload/20191029/e7bbfd49f9863cc1dbbcef5a706ae646.png","intro":"新增驻村领导扫码签到功能\n优化地区的展示效果\n修复已知的若干bug","name":"信息田园","packageName":"cn.xxxx","size":28.54,"updateTime":1575355614000,"version":"137","versionName":"1.3.7"}],"totalPage":0}
-     * message : 操作成功
-     * one : {"apk":"xxty_beta_1.3.4_Build20191203_1102.apk","apkUrl":"/upload/20191203/29fb36accd9d42234f2ec253a99c510d.3.7_build20191203_1049_fortest.apk","count":283,"createTime":1572283145000,"deleted":false,"id":5,"imgLogo":"/upload/20191029/e7bbfd49f9863cc1dbbcef5a706ae646.png","intro":"新增驻村领导扫码签到功能\n优化地区的展示效果\n修复已知的若干bug","name":"信息田园","packageName":"cn.xxxx","size":28.54,"updateTime":1575355614000,"version":"137","versionName":"1.3.7"}
-     * success : true
+     * message : 参数错误
+     * nu :
+     * ischeck : 0
+     * condition :
+     * com :
+     * status : 400
+     * state : 0
+     * data : []
      */
 
-    private int code;
-    private T data;
     private String message;
-    private boolean success;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
+    private String nu;
+    private String ischeck;
+    private String condition;
+    private String com;
+    private String status;
+    private String state;
+    private List<T> data;
 
     public String getMessage() {
         return message;
@@ -48,13 +42,59 @@ public class Resp<T> {
         this.message = message;
     }
 
-
-    public boolean isSuccess() {
-        return success;
+    public String getNu() {
+        return nu;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setNu(String nu) {
+        this.nu = nu;
     }
 
+    public String getIscheck() {
+        return ischeck;
+    }
+
+    public void setIscheck(String ischeck) {
+        this.ischeck = ischeck;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public String getCom() {
+        return com;
+    }
+
+    public void setCom(String com) {
+        this.com = com;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public List<T> getData() {
+        return data;
+    }
+
+    public void setData(List<T> data) {
+        this.data = data;
+    }
 }

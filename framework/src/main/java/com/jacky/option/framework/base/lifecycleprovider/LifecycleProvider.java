@@ -14,6 +14,8 @@ import io.reactivex.subjects.Subject;
  *     version: 1.0
  *     desc   :
  * </pre>
+ *
+ * @param <E> he type of the items emitted by the Observable
  */
 public interface LifecycleProvider<E> {
     @NonNull

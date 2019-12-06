@@ -1,10 +1,11 @@
 package com.jacky.option.net;
 
+import android.app.Application;
+
 import com.jacky.option.net.provider.IOKHtttpClientProvider;
 import com.jacky.option.net.provider.OkHttpProvider;
 import com.jacky.option.net.provider.ServiceProvider;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -34,9 +35,11 @@ public class HttpManager {
     }
 
     /**
-     * HttpManager初始化，在{@link HttpManager#getServiceProvider()}
-     * 或{@link HttpManager#getDiyServiceProvider(OkHttpClient)}
-     * 被调用之前才有效，建议放在{@link android.app.Application}里调用
+     * HttpManager初始化，在{@link HttpManager#getServiceProvider()}被调用之前才有效，
+     * 在{@link HttpManager#getServiceProvider()}调用的时候如果init()未被调用，会生成一个默认的OkHttpClient实例。
+     * 建议放在{@link Application#onCreate()}里调用。
+     * <br/>
+     * 该方法不会影响{@link HttpManager#getDiyServiceProvider(OkHttpClient)}中的OkHttpClient实例。
      *
      * @param debug 可调试
      * @return HttpManager
@@ -126,6 +129,7 @@ public class HttpManager {
             }
 
             mGlobalOkHttpClient = mProvider.providerOkHttpClient();
+            mProvider = null;
             return mGlobalOkHttpClient;
         }
 

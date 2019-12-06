@@ -9,7 +9,7 @@ import com.jacky.option.framework.mvp.IPresenter;
  *     e-mail : 363525749@qq.com
  *     time   : 2019/12/04
  *     version: 1.0
- *     desc   : 视图层Fragment基类
+ *     desc   : View层，视图层,Fragment基类
  * </pre>
  */
 public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFragment<P> {

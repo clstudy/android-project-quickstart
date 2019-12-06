@@ -13,8 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvp.ui.activity.AppVersionActivity"></activity>
-        <activity android:name=".mvp.ui.activity.VoiceActivity" />
+        <activity android:name=".mvp.ui.activity.KuaidiActivity"></activity>
         <activity android:name=".mvp.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

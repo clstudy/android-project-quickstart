@@ -15,6 +15,8 @@ import com.jacky.option.framework.mvp.IView;
  *     version: 1.0
  *     desc   : BaseActivity
  * </pre>
+ * <p>
+ * 抽象创建Presenter方法。
  */
 public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IView, IActivity {
     protected P mPresenter;

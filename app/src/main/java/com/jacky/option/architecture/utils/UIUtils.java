@@ -1,4 +1,4 @@
-package com.jacky.option.framework.utils;
+package com.jacky.option.architecture.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.jacky.option.framework.FrameworkInit;
+import com.jacky.option.architecture.MyApp;
 import com.trello.rxlifecycle2.internal.Preconditions;
 
 
@@ -20,13 +20,13 @@ public class UIUtils {
     private static final String TAG = "UIUtils";
 
     /**
-     * {@link FrameworkInit#init(Context)}
+     * {@link MyApp#getApplication()}
      *
      * @return
      */
     public static Context getContext() {
-        Preconditions.checkNotNull(FrameworkInit.getContext(), "please do first FrameworkInit.init");
-        return FrameworkInit.getContext();
+        Preconditions.checkNotNull(MyApp.getApplication(), "please do first FrameworkInit.init");
+        return MyApp.getApplication();
     }
 
     public static Resources getResource() {

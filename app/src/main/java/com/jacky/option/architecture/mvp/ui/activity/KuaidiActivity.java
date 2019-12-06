@@ -6,24 +6,24 @@ import android.support.annotation.Nullable;
 import com.jacky.option.architecture.base.BaseSupportActivity;
 
 
-import com.jacky.option.architecture.mvp.contract.VoiceContract;
-import com.jacky.option.architecture.mvp.presenter.VoicePresenter;
+import com.jacky.option.architecture.mvp.contract.KuaidiContract;
+import com.jacky.option.architecture.mvp.presenter.KuaidiPresenter;
 
 
 /**
  * <pre>
  *     author : jacks
- *     e-mail : 363525749@qq.com
- *     time   : 12/03/2019 22:22
+ *     e-mail : chenlong5@ffcs.cn
+ *     time   : 12/06/2019 17:16
  *     version: 1.0
- *     desc   : Voice
+ *     desc   : Kuaidi
  * </pre>
  */
-public class VoiceActivity extends BaseSupportActivity<VoicePresenter> implements VoiceContract.View {
+public class KuaidiActivity extends BaseSupportActivity<KuaidiPresenter> implements KuaidiContract.View {
 
     @Override
-    protected VoicePresenter createPresenter() {
-        return new VoicePresenter();
+    protected KuaidiPresenter createPresenter() {
+        return new KuaidiPresenter();
     }
 
     @Override

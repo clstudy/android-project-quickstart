@@ -11,11 +11,18 @@ import io.reactivex.annotations.NonNull;
  *     e-mail : 363525749@qq.com
  *     time   : 2019/12/03
  *     version: 1.0
- *     desc   :
+ *     desc   : Observable 绑定页面生命周期。
  * </pre>
  */
 public class LifecycleUtils {
 
+    /**
+     * Observable bind lifecycle
+     *
+     * @param lifecycleable lifecycle
+     * @param <T>           he type of the items emitted by the Observable
+     * @return
+     */
     public static <T> LifecycleTransformer<T> bindToLifecycle(@NonNull LifecycleProvider lifecycleable) {
         Preconditions.checkNotNull(lifecycleable, "lifecycleable == null");
         if (lifecycleable instanceof ActivityLifecycleProvider) {

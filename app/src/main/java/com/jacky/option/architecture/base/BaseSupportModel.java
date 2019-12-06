@@ -18,6 +18,13 @@ public class BaseSupportModel extends BaseModel {
         super(view);
     }
 
+    /**
+     * 调用network库的http请求方法
+     *
+     * @param cls http请求接口
+     * @param <S> the type Observable emmited data
+     * @return Observable
+     */
     protected <S> S getService(Class<S> cls) {
         return HttpManager.getInstance().getServiceProvider().createService(cls);
     }

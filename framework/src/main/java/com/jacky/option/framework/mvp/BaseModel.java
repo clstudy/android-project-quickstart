@@ -1,5 +1,7 @@
 package com.jacky.option.framework.mvp;
 
+import android.support.annotation.Nullable;
+
 import com.jacky.option.framework.base.lifecycleprovider.LifecycleProvider;
 import com.jacky.option.framework.base.lifecycleprovider.LifecycleUtils;
 import com.trello.rxlifecycle2.internal.Preconditions;
@@ -16,26 +18,25 @@ import io.reactivex.schedulers.Schedulers;
  *     e-mail : 363525749@qq.com
  *     time   : 2019/12/03
  *     version: 1.0
- *     desc   : Model层，数据的来源
+ *     desc   : Model层，数据的来源。
  * </pre>
  */
 public class BaseModel implements IModel {
 
     protected WeakReference<IView> mRootView;
 
-    public BaseModel(IView view) {
+    public BaseModel(@Nullable IView view) {
         this.mRootView = new WeakReference<>(view);
     }
 
     /**
      * 简单的线程切换
      *
-     * @param observable
-     * @param <T>
+     * @param observable emitter
+     * @param <T> he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transform(Observable<T> observable) {
-        Preconditions.checkNotNull(observable, "observable == null");
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -43,8 +44,8 @@ public class BaseModel implements IModel {
     /**
      * 有线程切换，加载状态
      *
-     * @param observable
-     * @param <T>
+     * @param observable emitter
+     * @param <T> he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transformWithLoading(Observable<T> observable) {
@@ -60,10 +61,12 @@ public class BaseModel implements IModel {
     }
 
     /**
-     * 有线程切换，绑定页面生命周期
+     * 有线程切换，绑定页面生命周期。
+     * 调用此方法，必须该类必须实现了{@link com.jacky.option.framework.base.IActivity}
+     * 或{@link com.jacky.option.framework.base.IFragment}。
      *
-     * @param observable
-     * @param <T>
+     * @param observable emitter
+     * @param <T> he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transformLifecycle(Observable<T> observable) {
@@ -77,9 +80,11 @@ public class BaseModel implements IModel {
 
     /**
      * 有线程切换，加载状态，绑定页面生命周期
+     * 调用此方法，必须该类必须实现了{@link com.jacky.option.framework.base.IActivity}
+     * 或{@link com.jacky.option.framework.base.IFragment}。
      *
-     * @param observable
-     * @param <T>
+     * @param observable emitter
+     * @param <T> he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transformWithLifecycleAndLoading(Observable<T> observable) {

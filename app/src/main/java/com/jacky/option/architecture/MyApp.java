@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.jacky.option.NetworkInit;
 import com.jacky.option.architecture.net.interceptor.AddParamInterceptor;
-import com.jacky.option.framework.FrameworkInit;
 import com.jacky.option.net.HttpManager;
 import com.jacky.option.net.interceptor.CacheControlInterceptor;
 import com.jacky.option.net.provider.OkHttpProvider;
@@ -19,15 +18,22 @@ import com.jacky.option.net.provider.OkHttpProvider;
  * </pre>
  */
 public class MyApp extends Application {
+
+    private static Application sApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        sApplication = this;
         HttpManager.getInstance()
                 .init(true, new OkHttpProvider()
                         .setTimeout(6, 6, 6)
                         .addInterceptors(new AddParamInterceptor())
                         .addNetworkInterceptor(new CacheControlInterceptor()));
         NetworkInit.init(this);
-        FrameworkInit.init(this);
+    }
+
+    public static Application getApplication() {
+        return sApplication;
     }
 }

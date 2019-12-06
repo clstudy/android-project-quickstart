@@ -20,6 +20,8 @@ import com.jacky.option.framework.mvp.IView;
  *     version: 1.0
  *     desc   : BaseFragment
  * </pre>
+ * <p>
+ * 抽象创建Presenter方法。数据懒加载。
  */
 public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IView, IFragment {
     protected boolean isInit = false;

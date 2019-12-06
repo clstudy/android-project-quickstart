@@ -4,6 +4,11 @@ import com.jacky.option.architecture.net.dto.Resp;
 import com.jacky.option.net.callback.IHttpCallBack;
 import com.jacky.option.net.subscriber.IAHttpResultObserver;
 
+/**
+ * 网络请求结果监听器
+ *
+ * @param <D> 业务上数据，payload
+ */
 public class MyHttpResultObserver<D> extends IAHttpResultObserver<Resp<D>, D, String> {
 
     public MyHttpResultObserver(IHttpCallBack<D, String> httpCallBack) {

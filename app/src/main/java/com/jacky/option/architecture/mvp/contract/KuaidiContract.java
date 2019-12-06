@@ -7,13 +7,13 @@ import com.jacky.option.framework.mvp.IView;
 /**
  * <pre>
  *     author : jacks
- *     e-mail : 363525749@qq.com
- *     time   : 12/03/2019 22:22
+ *     e-mail : chenlong5@ffcs.cn
+ *     time   : 12/06/2019 17:16
  *     version: 1.0
- *     desc   : Voice
+ *     desc   : Kuaidi
  * </pre>
  */
-public interface VoiceContract {
+public interface KuaidiContract {
     interface View extends IView {
 
     }

@@ -26,7 +26,8 @@ public class MyApp extends Application {
         super.onCreate();
         sApplication = this;
         HttpManager.getInstance()
-                .init(true, new OkHttpProvider()
+                .init(new OkHttpProvider()
+                        .isDebug(true)
                         .setTimeout(6, 6, 6)
                         .addInterceptors(new AddParamInterceptor())
                         .addNetworkInterceptor(new CacheControlInterceptor()));

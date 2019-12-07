@@ -16,14 +16,10 @@ import android.arch.lifecycle.OnLifecycleEvent;
 public class BasePresenter<V extends IView> implements IPresenter<V> {
     protected V mRootView;
 
-    /**
-     * 如果View层实现了LifecycleOwner，则监听其生命周期。
-     *
-     * @param rootView View层
-     */
     @Override
     public void attachView(V rootView) {
         mRootView = rootView;
+        // 如果View层实现了LifecycleOwner，则监听其生命周期。
         if (mRootView != null && mRootView instanceof LifecycleOwner) {
             ((LifecycleOwner) mRootView).getLifecycle().addObserver(this);
         }

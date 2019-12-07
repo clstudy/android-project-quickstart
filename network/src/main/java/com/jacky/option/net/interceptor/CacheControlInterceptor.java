@@ -1,7 +1,6 @@
 package com.jacky.option.net.interceptor;
 
 
-
 import com.jacky.option.NetUtils;
 
 import java.io.IOException;
@@ -15,6 +14,7 @@ import okhttp3.Response;
  * Created by jacky on 2018/3/21.
  * banker developer. <br/>
  * <br/>
+ * 缓存拦截器
  */
 public class CacheControlInterceptor implements Interceptor {
     @Override

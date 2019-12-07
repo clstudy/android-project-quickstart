@@ -16,9 +16,9 @@ import retrofit2.HttpException;
  * banker developer. <br/>
  * <br/>
  *
- * @param <T> 原始响应数据类型，http response raw data。
+ * @param <DTO> 原始响应数据类型，http response raw data。
  */
-public abstract class IHttpResultObserver<T> implements Observer<T> {//Subscriber
+public abstract class IHttpResultObserver<DTO> implements Observer<DTO> {//Subscriber
     private static final String TAG = "IAHttpResultObserver";
 
     protected Disposable mDisposable;
@@ -29,7 +29,7 @@ public abstract class IHttpResultObserver<T> implements Observer<T> {//Subscribe
     }
 
     @Override
-    public void onNext(T response) {
+    public void onNext(DTO response) {
         _onHttpSuccess(response);
     }
 
@@ -59,7 +59,7 @@ public abstract class IHttpResultObserver<T> implements Observer<T> {//Subscribe
      *
      * @param response 原始响应数据类型，http response raw data。
      */
-    protected abstract void _onHttpSuccess(T response);
+    protected abstract void _onHttpSuccess(DTO response);
 
     /**
      * 网络错误，如断网，无法找到server主机。

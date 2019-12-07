@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -72,6 +73,7 @@ public class UIUtils {
      * 弹土司
      */
     public static void showShortToast(@NonNull final CharSequence content) {
+        if (TextUtils.isEmpty(content)) return;
         Toast mToast = null;
         if (mToast == null) {
             mToast = Toast.makeText(getContext(), content, Toast.LENGTH_SHORT);
@@ -87,6 +89,7 @@ public class UIUtils {
      * 弹土司
      */
     public static void showShortToast(@StringRes final int stringId) {
+        if (stringId == 0) return;
         Toast mToast = null;
         if (mToast == null) {
             mToast = Toast.makeText(getContext(), stringId, Toast.LENGTH_SHORT);

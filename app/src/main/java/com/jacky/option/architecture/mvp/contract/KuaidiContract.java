@@ -1,7 +1,11 @@
 package com.jacky.option.architecture.mvp.contract;
 
+import com.jacky.option.architecture.net.dto.req.ReqKuaidi;
+import com.jacky.option.architecture.net.dto.resp.RespKuaidi;
 import com.jacky.option.framework.mvp.IPresenter;
 import com.jacky.option.framework.mvp.IView;
+
+import java.util.List;
 
 
 /**
@@ -15,10 +19,15 @@ import com.jacky.option.framework.mvp.IView;
  */
 public interface KuaidiContract {
     interface View extends IView {
+        void onReciveKuaidi(List<RespKuaidi> kuaidiList);
 
+        void onReciveKuaidiError(String err);
     }
 
     interface Prestenter extends IPresenter<View> {
+        void getKuaidiByGet(String type, long postid);
+
+        void getKuaidiByPost(ReqKuaidi kuaidi);
 
     }
 }

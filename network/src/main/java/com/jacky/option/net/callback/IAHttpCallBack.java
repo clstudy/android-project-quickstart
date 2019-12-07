@@ -5,9 +5,16 @@ package com.jacky.option.net.callback;
  * banker developer. <br/>
  * <br/>
  */
-public abstract class IAHttpCallBack<D, E> implements IHttpCallBack<D, E> {
+public abstract class IAHttpCallBack<DATA, ERROR> implements IHttpCallBack<DATA, ERROR> {
+
     @Override
     public void onComplete() {
 
     }
+
+    @Override
+    public void onNetWorkError(String netErr) {
+
+    }
+
 }

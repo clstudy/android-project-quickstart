@@ -33,7 +33,7 @@ public class BaseModel implements IModel {
      * 简单的线程切换
      *
      * @param observable emitter
-     * @param <T> he type of the items emitted by the Observable
+     * @param <T>        he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transform(Observable<T> observable) {
@@ -43,9 +43,10 @@ public class BaseModel implements IModel {
 
     /**
      * 有线程切换，加载状态
+     * {@link BaseModel}的构造方法不能传空值。
      *
      * @param observable emitter
-     * @param <T> he type of the items emitted by the Observable
+     * @param <T>        he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transformWithLoading(Observable<T> observable) {
@@ -64,9 +65,10 @@ public class BaseModel implements IModel {
      * 有线程切换，绑定页面生命周期。
      * 调用此方法，必须该类必须实现了{@link com.jacky.option.framework.base.IActivity}
      * 或{@link com.jacky.option.framework.base.IFragment}。
+     * 且{@link BaseModel}的构造方法不能传空值。
      *
      * @param observable emitter
-     * @param <T> he type of the items emitted by the Observable
+     * @param <T>        he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transformLifecycle(Observable<T> observable) {
@@ -82,9 +84,10 @@ public class BaseModel implements IModel {
      * 有线程切换，加载状态，绑定页面生命周期
      * 调用此方法，必须该类必须实现了{@link com.jacky.option.framework.base.IActivity}
      * 或{@link com.jacky.option.framework.base.IFragment}。
+     * 且{@link BaseModel}的构造方法不能传空值。
      *
      * @param observable emitter
-     * @param <T> he type of the items emitted by the Observable
+     * @param <T>        he type of the items emitted by the Observable
      * @return
      */
     protected <T> Observable<T> transformWithLifecycleAndLoading(Observable<T> observable) {

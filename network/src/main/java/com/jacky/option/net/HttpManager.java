@@ -41,11 +41,9 @@ public class HttpManager {
      * <br/>
      * 该方法不会影响{@link HttpManager#getDiyServiceProvider(OkHttpClient)}中的OkHttpClient实例。
      *
-     * @param debug 可调试
      * @return HttpManager
      */
-    public HttpManager init(boolean debug, IOKHtttpClientProvider okHttpClientProvider) {
-        OkHttpClientHolder.INSTANCE.isDebug(debug);
+    public HttpManager init(IOKHtttpClientProvider okHttpClientProvider) {
         if (okHttpClientProvider != null) {
             OkHttpClientHolder.INSTANCE.setProvider(okHttpClientProvider);
         }
@@ -53,7 +51,7 @@ public class HttpManager {
     }
 
     /**
-     * 设置url前缀,可多次调用。要在service调用http方法之前有用，service调用之后会把值清掉。
+     * 设置url前缀,可多次调用。要在service调用http方法之前有效，service调用之后会把值清掉。
      * 此方法未调用，会先查找service的成员变量名为"BASE_URL"的成员变量作url前缀。
      *
      * @param baseUrl url前缀
@@ -65,7 +63,7 @@ public class HttpManager {
     }
 
     /**
-     * 使用默认的ServiceProvider，引用的okhttpclient跟{@link HttpManager#init(boolean, IOKHtttpClientProvider)}
+     * 使用默认的ServiceProvider，引用的okhttpclient跟{@link HttpManager#init(IOKHtttpClientProvider)}
      * 的设置有关。
      *
      * @return
@@ -75,7 +73,7 @@ public class HttpManager {
     }
 
     /**
-     * 使用自定义的ServiceProvider，{@link HttpManager#init(boolean, IOKHtttpClientProvider)}设置对其无效
+     * 使用自定义的ServiceProvider，{@link HttpManager#init(IOKHtttpClientProvider)}设置对其无效
      *
      * @param client
      * @return
@@ -92,22 +90,12 @@ public class HttpManager {
 
         private IOKHtttpClientProvider mProvider;
         private OkHttpClient mGlobalOkHttpClient;
-        private boolean isDebug;
 
         private OkHttpClientHolder() {
         }
 
-        public void setProvider(IOKHtttpClientProvider provider) {
+        private void setProvider(IOKHtttpClientProvider provider) {
             mProvider = provider;
-        }
-
-        /**
-         * 调试打开log输出
-         *
-         * @param debug 调试
-         */
-        private void isDebug(boolean debug) {
-            this.isDebug = debug;
         }
 
         /**
@@ -121,12 +109,6 @@ public class HttpManager {
 
             if (mProvider == null)
                 mProvider = new OkHttpProvider();
-
-            if (isDebug && mProvider.providerInterceptorList() != null && !mProvider.providerInterceptorList().isEmpty()) {
-                HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
-                        .setLevel(HttpLoggingInterceptor.Level.BODY);
-                mProvider.providerInterceptorList().addLast(httpLoggingInterceptor);
-            }
 
             mGlobalOkHttpClient = mProvider.providerOkHttpClient();
             mProvider = null;

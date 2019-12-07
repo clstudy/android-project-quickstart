@@ -1,7 +1,5 @@
 package com.jacky.option.architecture.net.dto;
 
-import java.util.List;
-
 /**
  * <pre>
  *     author : jacks
@@ -11,7 +9,7 @@ import java.util.List;
  *     desc   :
  * </pre>
  */
-public class Resp<T> {
+public class Resp<PAYLOAD> {
 
 
     /**
@@ -32,7 +30,7 @@ public class Resp<T> {
     private String com;
     private String status;
     private String state;
-    private List<T> data;
+    private PAYLOAD data;
 
     public String getMessage() {
         return message;
@@ -90,11 +88,11 @@ public class Resp<T> {
         this.state = state;
     }
 
-    public List<T> getData() {
+    public PAYLOAD getData() {
         return data;
     }
 
-    public void setData(List<T> data) {
+    public void setData(PAYLOAD data) {
         this.data = data;
     }
 }

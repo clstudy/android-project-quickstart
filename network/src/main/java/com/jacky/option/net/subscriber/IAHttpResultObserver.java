@@ -11,19 +11,19 @@ import retrofit2.HttpException;
  * banker developer. <br/>
  * <br/>
  *
- * @param <T> 原始数据类型
- * @param <R> 处理原始数据，返回处理完的 业务上的数据类型
- * @param <E> 处理原始数据，返回处理完的 错误信息的数据类型
+ * @param <DTO>     原始数据类型
+ * @param <PAYLOAD> 处理原始数据，返回处理完的 业务上的数据类型
+ * @param <ERROR>   处理原始数据，返回处理完的 错误信息的数据类型
  */
-public abstract class IAHttpResultObserver<T, R, E> extends IHttpResultObserver<T> {//Subscriber
+public abstract class IAHttpResultObserver<DTO, PAYLOAD, ERROR> extends IHttpResultObserver<DTO> {//Subscriber
     private static final String TAG = "IAHttpResultObserver";
 
     /**
      * 处理原始数据回调
      */
-    protected IHttpCallBack<R, E> mHttpCallBack;
+    protected IHttpCallBack<PAYLOAD, ERROR> mHttpCallBack;
 
-    public IAHttpResultObserver(IHttpCallBack<R, E> httpCallBack) {
+    public IAHttpResultObserver(IHttpCallBack<PAYLOAD, ERROR> httpCallBack) {
         mHttpCallBack = httpCallBack;
     }
 
@@ -43,8 +43,7 @@ public abstract class IAHttpResultObserver<T, R, E> extends IHttpResultObserver<
     protected void _onHandlerHttpException(HttpException e) {
     }
 
-    protected abstract void _onHttpSuccess(T response);
-
+    protected abstract void _onHttpSuccess(DTO response);
 
 
 }

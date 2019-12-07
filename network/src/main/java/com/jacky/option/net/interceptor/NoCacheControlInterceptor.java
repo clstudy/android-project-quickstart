@@ -11,6 +11,7 @@ import okhttp3.Response;
  * Created by jacky on 2018/3/21.
  * banker developer. <br/>
  * <br/>
+ * 强制不缓存
  */
 public class NoCacheControlInterceptor implements Interceptor {
     @Override

@@ -16,8 +16,8 @@ public interface IView {
     void hideLoading();
 
     /**
-     * View层,监听http请求错误的回调。
+     * View层,监听http请求网络错误的回调。注意，不是业务上的错误。
      */
-    void onRequestHttpError(String errorInfo);
+    void onRequestHttpError(String netErr);
 
 }

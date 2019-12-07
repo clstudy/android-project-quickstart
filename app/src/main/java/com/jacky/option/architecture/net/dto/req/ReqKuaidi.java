@@ -9,7 +9,7 @@ package com.jacky.option.architecture.net.dto.req;
  *     desc   :
  * </pre>
  */
-public class ReaKuaidi {
+public class ReqKuaidi {
 
     /**
      * type : yuantong

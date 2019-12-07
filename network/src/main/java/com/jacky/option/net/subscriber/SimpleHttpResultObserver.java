@@ -11,14 +11,14 @@ import retrofit2.HttpException;
  * <br/>
  */
 
-public class SimpleHttpResultObserver<T> extends IAHttpResultObserver<T, T, String> {
+public class SimpleHttpResultObserver<DTO> extends IAHttpResultObserver<DTO, DTO, String> {
     private static final String TAG = "SimpleHttpResultObserver";
 
-    public SimpleHttpResultObserver(IHttpCallBack<T, String> httpCallBack) {
+    public SimpleHttpResultObserver(IHttpCallBack<DTO, String> httpCallBack) {
         super(httpCallBack);
     }
 
-    protected void _onHttpSuccess(T response) {
+    protected void _onHttpSuccess(DTO response) {
         if (mHttpCallBack != null) {
             mHttpCallBack.onBizSuccess(response);
         }

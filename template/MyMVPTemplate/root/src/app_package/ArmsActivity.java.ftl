@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.jacky.option.architecture.base.BaseSupportActivity;
+import com.jacky.option.architecture.R;
 
 
 import ${contractPackageName}.${pageName}Contract;
@@ -24,6 +25,8 @@ public class ${pageName}Activity extends BaseSupportActivity<${pageName}Presente
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_${pageName});
+
     }
 
 }

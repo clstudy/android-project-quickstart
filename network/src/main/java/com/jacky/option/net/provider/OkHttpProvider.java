@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 
 /**
@@ -24,13 +25,15 @@ public class OkHttpProvider implements IOKHtttpClientProvider {
     private final static long DEFAULT_TIMEOUT_IO = 10;
 
     private LinkedList<Interceptor> mInterceptorList;
-    private Interceptor mNetworkInterceptor;
+    private LinkedList<Interceptor> mNetworkInterceptorList;
     private long mTimeoutConn;
     private long mTimeoutWrite;
     private long mTimeoutRead;
+    private boolean isDebug;
 
     public OkHttpProvider() {
         mInterceptorList = new LinkedList<>();
+        mNetworkInterceptorList = new LinkedList<>();
     }
 
     public OkHttpProvider setTimeout(long conn, long write, long read) {
@@ -40,19 +43,19 @@ public class OkHttpProvider implements IOKHtttpClientProvider {
         return this;
     }
 
-    public OkHttpProvider addInterceptors(Interceptor... customInterceptors) {
-        Collections.addAll(mInterceptorList, customInterceptors);
+    public OkHttpProvider addInterceptors(Interceptor... interceptors) {
+        Collections.addAll(mInterceptorList, interceptors);
         return this;
     }
 
-    public OkHttpProvider addNetworkInterceptor(Interceptor networkInterceptor) {
-        this.mNetworkInterceptor = networkInterceptor;
+    public OkHttpProvider addNetworkInterceptor(Interceptor... networkInterceptor) {
+        Collections.addAll(mNetworkInterceptorList, networkInterceptor);
         return this;
     }
 
-    @Override
-    public LinkedList<Interceptor> providerInterceptorList() {
-        return mInterceptorList;
+    public OkHttpProvider isDebug(boolean debug) {
+        this.isDebug = debug;
+        return this;
     }
 
     /**
@@ -81,15 +84,26 @@ public class OkHttpProvider implements IOKHtttpClientProvider {
         httpClientBuilder.readTimeout(read, TimeUnit.SECONDS);
 
         //设置缓存
-        File httpCacheDirectory = new File(NetworkInit.getContext().getCacheDir(), "OkHttpCache");
-        httpClientBuilder.cache(new Cache(httpCacheDirectory, 100 * 1024 * 1024));
-        // 自定义拦截器
+        if(NetworkInit.getContext()!=null){
+            File httpCacheDirectory = new File(NetworkInit.getContext().getCacheDir(), "OkHttpCache");
+            httpClientBuilder.cache(new Cache(httpCacheDirectory, 100 * 1024 * 1024));
+        }
+
+        // 日志输出
+        if(isDebug){
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
+                    .setLevel(HttpLoggingInterceptor.Level.BODY);
+            mInterceptorList.addLast(httpLoggingInterceptor);
+        }
+
+        // 设置应用拦截器
         for (Interceptor interceptor : mInterceptorList) {
             httpClientBuilder.addInterceptor(interceptor);
         }
-        //设置缓存拦截器
-        if (mNetworkInterceptor != null) {
-            httpClientBuilder.addNetworkInterceptor(mNetworkInterceptor);
+
+        // 设置网络拦截器
+        for (Interceptor interceptor : mNetworkInterceptorList) {
+            httpClientBuilder.addNetworkInterceptor(interceptor);
         }
         return httpClientBuilder.build();
     }

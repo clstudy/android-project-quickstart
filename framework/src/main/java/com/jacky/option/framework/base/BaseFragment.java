@@ -48,6 +48,7 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
             mPresenter.detachView();
             mPresenter = null;
         }
+        hideLoading();
     }
 
     @Override

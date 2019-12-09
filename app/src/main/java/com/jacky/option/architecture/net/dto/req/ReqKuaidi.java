@@ -17,7 +17,7 @@ public class ReqKuaidi {
      */
 
     private String type;
-    private long postid;
+    private String postid;
 
     public String getType() {
         return type;
@@ -27,11 +27,11 @@ public class ReqKuaidi {
         this.type = type;
     }
 
-    public long getPostid() {
+    public String getPostid() {
         return postid;
     }
 
-    public void setPostid(long postid) {
+    public void setPostid(String postid) {
         this.postid = postid;
     }
 }

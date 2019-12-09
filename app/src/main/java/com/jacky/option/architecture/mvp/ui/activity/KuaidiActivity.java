@@ -2,6 +2,7 @@ package com.jacky.option.architecture.mvp.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ import java.util.List;
 public class KuaidiActivity extends BaseSupportActivity<KuaidiPresenter> implements KuaidiContract.View, OtherContract.View, View.OnClickListener {
 
     private EditText mOtherdataEt;
+    private EditText mTypeEt;
+    private EditText mPostidEt;
     private TextView mSuccTextView;
     private TextView mErrTextView;
     private OtherPresenter mOtherPresenter;
@@ -51,6 +54,8 @@ public class KuaidiActivity extends BaseSupportActivity<KuaidiPresenter> impleme
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         mOtherdataEt = findViewById(R.id.otherdata);
+        mTypeEt = findViewById(R.id.type);
+        mPostidEt = findViewById(R.id.postid);
         mSuccTextView = findViewById(R.id.textView);
         mErrTextView = findViewById(R.id.textView2);
 
@@ -61,10 +66,10 @@ public class KuaidiActivity extends BaseSupportActivity<KuaidiPresenter> impleme
 
     @Override
     public void onReciveKuaidi(List<RespKuaidi> kuaidiList) {
-        StringBuilder builder = new StringBuilder(mSuccTextView.getText());
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < kuaidiList.size(); i++) {
             RespKuaidi respKuaidi = kuaidiList.get(i);
-            builder.append(respKuaidi.getTime() + " " + respKuaidi.getContext() + " " + respKuaidi.getFtime() + " \n");
+            builder.append(respKuaidi.getFtime() + " " + respKuaidi.getContext() + " \n");
         }
         mSuccTextView.setText(builder.toString());
     }
@@ -82,12 +87,28 @@ public class KuaidiActivity extends BaseSupportActivity<KuaidiPresenter> impleme
                 mOtherPresenter.getFromOtherPrestenter(mOtherdataEt.getText().toString());
                 break;
             case R.id.button:
-                mPresenter.getKuaidiByGet("yuantong", 1111111111L);
+                if (TextUtils.isEmpty(mTypeEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递名称不为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPostidEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递单号不为空");
+                    return;
+                }
+                mPresenter.getKuaidiByGet(mTypeEt.getText().toString().trim(), mPostidEt.getText().toString().trim());
                 break;
             case R.id.button2:
+                if (TextUtils.isEmpty(mTypeEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递名称不为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPostidEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递单号不为空");
+                    return;
+                }
                 ReqKuaidi reaKuaidi = new ReqKuaidi();
-                reaKuaidi.setPostid(1111111111L);
-                reaKuaidi.setType("yuantong");
+                reaKuaidi.setPostid(mPostidEt.getText().toString().trim());
+                reaKuaidi.setType(mTypeEt.getText().toString().trim());
                 mPresenter.getKuaidiByPost(reaKuaidi);
                 break;
         }

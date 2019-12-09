@@ -25,7 +25,7 @@ public interface KuaidiContract {
     }
 
     interface Prestenter extends IPresenter<View> {
-        void getKuaidiByGet(String type, long postid);
+        void getKuaidiByGet(String type, String postid);
 
         void getKuaidiByPost(ReqKuaidi kuaidi);
 

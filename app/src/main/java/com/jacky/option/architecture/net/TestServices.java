@@ -36,7 +36,7 @@ public interface TestServices {
      * @return
      */
     @GET("query")
-    Observable<Resp<List<RespKuaidi>>> getKuaidiByGet(@Query("type") String type, @Query("postid") long postid);
+    Observable<Resp<List<RespKuaidi>>> getKuaidiByGet(@Query("type") String type, @Query("postid") String postid);
 
 
     /**

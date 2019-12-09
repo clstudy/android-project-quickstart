@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入快递名称,如：yuantong" />
+
+    <EditText
+        android:id="@+id/postid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入快递单号" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"

@@ -3,7 +3,9 @@ package com.jacky.option.architecture.mvp.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jacky.option.architecture.R;
@@ -29,6 +31,9 @@ public class NoFrameworkActivity extends AppCompatActivity implements View.OnCli
     private DataModel mDataModel;
     private TextView mSuccTextView;
     private TextView mErrTextView;
+    private EditText mTypeEt;
+    private EditText mPostidEt;
+
     private SimpleHttpCallBack<List<RespKuaidi>> mListSimpleHttpCallBack;
 
     @Override
@@ -40,6 +45,8 @@ public class NoFrameworkActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.button2).setOnClickListener(this);
         mSuccTextView = findViewById(R.id.textView);
         mErrTextView = findViewById(R.id.textView2);
+        mTypeEt = findViewById(R.id.type);
+        mPostidEt = findViewById(R.id.postid);
 
         mDataModel = new DataModel(null);
         mListSimpleHttpCallBack = new SimpleHttpCallBack<List<RespKuaidi>>() {
@@ -50,7 +57,7 @@ public class NoFrameworkActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onBizSuccess(List<RespKuaidi> kuaidiList) {
-                StringBuilder builder = new StringBuilder(mSuccTextView.getText());
+                StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < kuaidiList.size(); i++) {
                     RespKuaidi respKuaidi = kuaidiList.get(i);
                     builder.append(respKuaidi.getTime() + " " + respKuaidi.getContext() + " " + respKuaidi.getFtime() + " \n");
@@ -69,12 +76,28 @@ public class NoFrameworkActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:
-                mDataModel.getKuaidiNoMVPByGet("yuantong", 1111111111L, mListSimpleHttpCallBack);
+                if (TextUtils.isEmpty(mTypeEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递名称不为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPostidEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递单号不为空");
+                    return;
+                }
+                mDataModel.getKuaidiNoMVPByGet(mTypeEt.getText().toString().trim(), mPostidEt.getText().toString().trim(), mListSimpleHttpCallBack);
                 break;
             case R.id.button2:
+                if (TextUtils.isEmpty(mTypeEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递名称不为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPostidEt.getText().toString().trim())) {
+                    UIUtils.showShortToast("快递单号不为空");
+                    return;
+                }
                 ReqKuaidi reaKuaidi = new ReqKuaidi();
-                reaKuaidi.setPostid(1111111111L);
-                reaKuaidi.setType("yuantong");
+                reaKuaidi.setPostid(mPostidEt.getText().toString().trim());
+                reaKuaidi.setType(mTypeEt.getText().toString().trim());
                 mDataModel.getKuaidiNoMVPByPost(reaKuaidi, mListSimpleHttpCallBack);
                 break;
         }

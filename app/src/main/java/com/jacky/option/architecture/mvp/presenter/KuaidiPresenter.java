@@ -22,9 +22,9 @@ import java.util.List;
 public class KuaidiPresenter extends BasePresenter<KuaidiContract.View> implements KuaidiContract.Prestenter {
 
     @Override
-    public void getKuaidiByGet(String type, long postid) {
+    public void getKuaidiByGet(String type, String postid) {
         DataModel dataModel = new DataModel(mRootView);
-        dataModel.getKuaidiByGet("yuantong", 1111111111L, new SimpleHttpCallBack<List<RespKuaidi>>() {
+        dataModel.getKuaidiByGet("yuantong", postid, new SimpleHttpCallBack<List<RespKuaidi>>() {
             @Override
             public void onNetWorkError(String netErr) {
                 mRootView.onRequestHttpError(netErr);
@@ -45,8 +45,6 @@ public class KuaidiPresenter extends BasePresenter<KuaidiContract.View> implemen
     @Override
     public void getKuaidiByPost(ReqKuaidi kuaidi) {
         ReqKuaidi reaKuaidi = new ReqKuaidi();
-        reaKuaidi.setPostid(1111111111L);
-        reaKuaidi.setType("yuantong");
         DataModel dataModel = new DataModel(mRootView);
         dataModel.getKuaidiByPost(reaKuaidi, new SimpleHttpCallBack<List<RespKuaidi>>() {
             @Override

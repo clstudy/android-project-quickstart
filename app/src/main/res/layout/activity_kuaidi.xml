@@ -9,6 +9,7 @@
         android:id="@+id/otherdata"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="请输入0或1"
         android:inputType="number" />
 
     <Button
@@ -20,7 +21,20 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="#17e7e7"/>
+        android:background="#F00" />
+
+    <EditText
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入快递名称,如：yuantong" />
+
+    <EditText
+        android:id="@+id/postid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入快递单号" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
@@ -32,10 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="业务成功的回调数据" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#17e7e7"/>
+
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"

@@ -33,6 +33,7 @@
 * Mac : /Applications/Android Studio.app/Contents/plugins/android/lib/templates/activities
 
 (**请注意是复制整个文件夹, 不是里面的内容!是放在 activities 文件夹里, 不是 gradle-projects 文件夹!!!**)
+
 **最后记得重启 AndroidStudio !**
 
 

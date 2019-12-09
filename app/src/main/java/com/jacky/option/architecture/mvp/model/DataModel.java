@@ -52,7 +52,7 @@ public class DataModel extends BaseSupportModel {
      * @param postid
      * @param callBack
      */
-    public void getKuaidiByGet(String type, long postid, SimpleHttpCallBack<List<RespKuaidi>> callBack) {
+    public void getKuaidiByGet(String type, String postid, SimpleHttpCallBack<List<RespKuaidi>> callBack) {
         transformWithLifecycleAndLoading(getService(TestServices.class).getKuaidiByGet(type, postid))
                 .subscribe(new MyHttpResultObserver<>(callBack));
     }
@@ -83,7 +83,7 @@ public class DataModel extends BaseSupportModel {
      * @param postid
      * @param callBack
      */
-    public void getKuaidiNoMVPByGet(String type, long postid, SimpleHttpCallBack<List<RespKuaidi>> callBack) {
+    public void getKuaidiNoMVPByGet(String type, String postid, SimpleHttpCallBack<List<RespKuaidi>> callBack) {
         transform(getService(TestServices.class).getKuaidiByGet(type, postid))
                 .subscribe(new MyHttpResultObserver<>(callBack));
     }

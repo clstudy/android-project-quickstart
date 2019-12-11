@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.GsonBuilder;
+import com.jacky.option.net.HttpManager;
 
 import java.lang.reflect.Field;
 
@@ -47,14 +48,17 @@ public class ServiceProvider {
      * @return HTTP request service 代理对象
      */
     public <S> S createService(Class<S> serviceClass, @Nullable Converter.Factory factory) {
-        if (TextUtils.isEmpty(mBaseUrl)) {
-            try {
-                Field baseUrlField = serviceClass.getField("BASE_URL");
-                mBaseUrl = (String) baseUrlField.get(serviceClass);
-            } catch (Exception e) {
-//                Log.d(TAG, "createService: BASE_URL not exist");
-            }
+        String url = null;
 
+        if (serviceClass.isAnnotationPresent(BaseUrl.class)) {
+            url = serviceClass.getAnnotation(BaseUrl.class).value();
+        }
+
+        if (TextUtils.isEmpty(url)) {
+            if (TextUtils.isEmpty(mBaseUrl)) {
+                throw new RuntimeException("base url can not be null,please add Annotation '@BaseUrl(baseUrl)' to serviceClass, or call 'HttpManager.getInstance().setUrl(baseUrl)' ");
+            }
+            url = mBaseUrl;
         }
 
         if (factory == null) {
@@ -62,12 +66,11 @@ public class ServiceProvider {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(mBaseUrl)
+                .baseUrl(url)
                 .client(mOkHttpClient)
                 .addConverterFactory(factory)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        mBaseUrl = "";
         return retrofit.create(serviceClass);
     }
 
@@ -78,7 +81,7 @@ public class ServiceProvider {
             INSTANCE = new ServiceProvider();
         }
 
-        public Builder addUrl(String baseUrl) {
+        public Builder setUrl(String baseUrl) {
             if (baseUrl != null)
                 INSTANCE.mBaseUrl = baseUrl;
             return this;

@@ -2,12 +2,12 @@ package com.jacky.option.net;
 
 import android.app.Application;
 
+import com.jacky.option.net.provider.BaseUrl;
 import com.jacky.option.net.provider.IOKHtttpClientProvider;
 import com.jacky.option.net.provider.OkHttpProvider;
 import com.jacky.option.net.provider.ServiceProvider;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by jacky on 2018/3/21.
@@ -51,14 +51,16 @@ public class HttpManager {
     }
 
     /**
-     * 设置url前缀,可多次调用。要在service调用http方法之前有效，service调用之后会把值清掉。
-     * 此方法未调用，会先查找service的成员变量名为"BASE_URL"的成员变量作url前缀。
+     * 设置url前缀,可多次调用。
+     * 此方法不一定会生效，
+     * 因为{@link ServiceProvider}会先查找接口service的{@link BaseUrl}注解的值作url前缀，
+     * 如果未有{@link BaseUrl}注解或注解没有值才会调用此处设置的值。
      *
      * @param baseUrl url前缀
      * @return
      */
     public HttpManager setUrl(String baseUrl) {
-        mBuilder.addUrl(baseUrl);
+        mBuilder.setUrl(baseUrl);
         return instance;
     }
 

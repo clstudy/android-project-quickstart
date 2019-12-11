@@ -3,6 +3,7 @@ package com.jacky.option.architecture.net;
 import com.jacky.option.architecture.net.dto.Resp;
 import com.jacky.option.architecture.net.dto.req.ReqKuaidi;
 import com.jacky.option.architecture.net.dto.resp.RespKuaidi;
+import com.jacky.option.net.provider.BaseUrl;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * <pre>
@@ -21,10 +23,9 @@ import retrofit2.http.Query;
  *     desc   : demo，可自行删掉。
  * </pre>
  */
+@BaseUrl("http://www.kuaidi100.com/")
 public interface TestServices {
     // http://www.kuaidi100.com/query?type=yuantong&=11111111111
-
-    String BASE_URL = "http://www.kuaidi100.com/";
 
     /**
      * 请求业务成功

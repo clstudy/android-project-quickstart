@@ -1,7 +1,7 @@
 package com.jacky.option.architecture.base;
 
 import com.jacky.option.architecture.utils.Loadinghelper;
-import com.jacky.option.architecture.utils.UIUtils;
+import com.jacky.option.common.UIUtils;
 import com.jacky.option.framework.base.BaseActivity;
 import com.jacky.option.framework.mvp.IPresenter;
 

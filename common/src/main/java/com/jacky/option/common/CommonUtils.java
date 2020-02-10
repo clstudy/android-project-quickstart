@@ -1,9 +1,5 @@
-package com.jacky.option.architecture.utils;
+package com.jacky.option.common;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import java.util.Calendar;
@@ -30,20 +26,6 @@ public class CommonUtils {
         }
         return (long) (Math.random() * 9 * Math.pow(10, n - 1)) + (long) Math.pow(10, n - 1);
     }
-
-    //获取设备号
-    public static String getDeviceID(Context context) {
-        String deviceId = "0";
-        try {
-            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            deviceId = tm.getDeviceId();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        LogUtils.d("getDeviceID: =" + deviceId);
-        return deviceId;
-    }
-
 
     /**
      * 天数间隔
@@ -133,7 +115,12 @@ public class CommonUtils {
         return matcher.matches();
     }
 
-
+    /**
+     * 字符串马赛克
+     *
+     * @param name
+     * @return
+     */
     public static String toMosaic(String name) {
         if (TextUtils.isEmpty(name)) return "";
         StringBuffer stringBuffer = new StringBuffer();
@@ -151,46 +138,5 @@ public class CommonUtils {
         return stringBuffer.toString();
     }
 
-    /**
-     * 获取当前app的versionName
-     */
-    public static String getCurrentVersion() {
-        PackageManager pm = UIUtils.getContext().getPackageManager();
-        try {
-            PackageInfo packageInfo = pm.getPackageInfo(UIUtils.getContext().getPackageName(), 0);
-            String version = packageInfo.versionName;
-            return version;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "0.0";
-        }
-    }
-
-    /**
-     * 获取当前app的versionCode
-     */
-    public static int getCurrentVersionCode() {
-        PackageManager pm = UIUtils.getContext().getPackageManager();
-        try {
-            PackageInfo packageInfo = pm.getPackageInfo(UIUtils.getContext().getPackageName(), 0);
-            int version = packageInfo.versionCode;
-            return version;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public static String getAppMetaData(String metaDataName) {
-        String msg = "";
-        try {
-            msg = UIUtils.getContext().getPackageManager().getApplicationInfo(
-                    UIUtils.getContext().getPackageName(), PackageManager.GET_META_DATA)
-                    .metaData.getString(metaDataName);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return msg;
-    }
 
 }

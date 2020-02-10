@@ -1,4 +1,4 @@
-package com.jacky.option.architecture.mvp.ui.view;
+package com.jacky.option.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -10,9 +10,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.jacky.option.architecture.R;
 
-
+/**
+ * 菊花loading控件
+ */
 public class ChrysanthemumLoadingView extends View {
 
     private int mWidth;
@@ -57,16 +58,12 @@ public class ChrysanthemumLoadingView extends View {
         int indexCount = typedArray.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
             int attr = typedArray.getIndex(i);
-            switch (attr) {
-                case R.styleable.ChrysanthemumLoadingView_pathColor:
-                    mSegmentColor = typedArray.getColor(attr, mDefaultColor);
-                    break;
-                case R.styleable.ChrysanthemumLoadingView_segmentLength:
-                    mSegmentLength = typedArray.getDimensionPixelSize(attr, mDefaultSegmentLength);
-                    break;
-                case R.styleable.ChrysanthemumLoadingView_segmentWidth:
-                    mSegmentWidth = typedArray.getDimensionPixelSize(attr, mDefaultSegmentWidth);
-                    break;
+            if (attr == R.styleable.ChrysanthemumLoadingView_pathColor) {
+                mSegmentColor = typedArray.getColor(attr, mDefaultColor);
+            } else if (attr == R.styleable.ChrysanthemumLoadingView_segmentLength) {
+                mSegmentLength = typedArray.getDimensionPixelSize(attr, mDefaultSegmentLength);
+            } else if (attr == R.styleable.ChrysanthemumLoadingView_segmentWidth) {
+                mSegmentWidth = typedArray.getDimensionPixelSize(attr, mDefaultSegmentWidth);
             }
         }
         typedArray.recycle();

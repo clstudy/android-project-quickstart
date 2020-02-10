@@ -1,4 +1,4 @@
-package com.jacky.option.architecture.utils;
+package com.jacky.option.common;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.jacky.option.architecture.MyApp;
-import com.trello.rxlifecycle2.internal.Preconditions;
-
 
 /**
  * User Interface utils
@@ -21,13 +18,12 @@ public class UIUtils {
     private static final String TAG = "UIUtils";
 
     /**
-     * {@link MyApp#getApplication()}
+     * {@link AppContextHolder#getContext()} ()}
      *
      * @return
      */
     public static Context getContext() {
-        Preconditions.checkNotNull(MyApp.getApplication(), "please do first FrameworkInit.init");
-        return MyApp.getApplication();
+        return AppContextHolder.getContext();
     }
 
     public static Resources getResource() {
@@ -99,26 +95,6 @@ public class UIUtils {
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.show();
 
-    }
-
-    public static int px2dip(int px) {
-        final float scale = getResource().getDisplayMetrics().density;
-        return (int) (px / scale + 0.5f);
-    }
-
-    public static int dip2px(int dip) {
-        final float scale = getResource().getDisplayMetrics().density;
-        return (int) (dip * scale + 0.5f);
-    }
-
-    public static int px2sp(float pxValue) {
-        final float fontScale = getResource().getDisplayMetrics().scaledDensity;
-        return (int) (pxValue / fontScale + 0.5f);
-    }
-
-    public static int sp2px(float spValue) {
-        final float fontScale = getResource().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
     }
 
 }

@@ -7,7 +7,7 @@
     android:gravity="center"
     android:padding="16dp">
 
-    <com.jacky.option.architecture.mvp.ui.view.ChrysanthemumLoadingView
+    <com.jacky.option.widget.ChrysanthemumLoadingView
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:pathColor="#f00"

@@ -12,7 +12,7 @@ import com.jacky.option.architecture.R;
 import com.jacky.option.architecture.mvp.model.DataModel;
 import com.jacky.option.architecture.net.dto.req.ReqKuaidi;
 import com.jacky.option.architecture.net.dto.resp.RespKuaidi;
-import com.jacky.option.architecture.utils.UIUtils;
+import com.jacky.option.common.UIUtils;
 import com.jacky.option.net.callback.SimpleHttpCallBack;
 
 import java.util.List;

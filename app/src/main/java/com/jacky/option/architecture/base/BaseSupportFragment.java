@@ -1,6 +1,6 @@
 package com.jacky.option.architecture.base;
 
-import com.jacky.option.architecture.utils.UIUtils;
+import com.jacky.option.common.UIUtils;
 import com.jacky.option.framework.base.BaseFragment;
 import com.jacky.option.framework.mvp.IPresenter;
 

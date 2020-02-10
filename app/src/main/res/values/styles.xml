@@ -7,11 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <declare-styleable name="ChrysanthemumLoadingView">
-        <attr name="pathColor" format="color" />
-        <attr name="segmentLength" format="dimension" />
-        <attr name="segmentWidth" format="dimension" />
-    </declare-styleable>
+
 
     <style name="dialog" parent="android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>

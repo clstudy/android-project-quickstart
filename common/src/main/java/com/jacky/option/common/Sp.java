@@ -1,4 +1,4 @@
-package com.jacky.option.architecture.utils;
+package com.jacky.option.common;
 
 import android.content.Context;
 import android.content.SharedPreferences;

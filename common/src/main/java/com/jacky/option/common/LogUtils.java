@@ -1,9 +1,9 @@
-package com.jacky.option.architecture.utils;
+package com.jacky.option.common;
 
 import android.util.Log;
 
 public class LogUtils {
-    private static final String mTag = "banker_log/";
+    private static final String mTag = "LogUtils/";
 
     /**
      * 是否允许输出log

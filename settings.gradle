@@ -1,2 +1,2 @@
-include ':app', ':network', ':framework'
+include ':app', ':network', ':framework', ':widget', ':common'
 rootProject.name='Architecture'

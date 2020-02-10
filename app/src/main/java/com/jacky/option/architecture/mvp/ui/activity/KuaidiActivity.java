@@ -15,7 +15,7 @@ import com.jacky.option.architecture.mvp.presenter.KuaidiPresenter;
 import com.jacky.option.architecture.mvp.presenter.OtherPresenter;
 import com.jacky.option.architecture.net.dto.req.ReqKuaidi;
 import com.jacky.option.architecture.net.dto.resp.RespKuaidi;
-import com.jacky.option.architecture.utils.UIUtils;
+import com.jacky.option.common.UIUtils;
 
 import java.util.List;
 

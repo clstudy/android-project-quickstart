@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
 /**
  * <pre>
  *     author : jacks
- *     e-mail : chenlong5@ffcs.cn
+ *     e-mail : 363525749@qq.com
  *     time   : 2019/12/07
  *     version: 1.0
  *     desc   :

@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * <pre>
  *     author : jacks
- *     e-mail : chenlong5@ffcs.cn
+ *     e-mail : 363525749@qq.com
  *     time   : 12/06/2019 17:16
  *     version: 1.0
  *     desc   : Kuaidi，mvp使用的demo，可自行删掉。

@@ -9,7 +9,7 @@ import com.jacky.option.architecture.mvp.contract.OtherContract;
 /**
  * <pre>
  *     author : jacks
- *     e-mail : chenlong5@ffcs.cn
+ *     e-mail : 363525749@qq.com
  *     time   : 12/08/2019 09:16
  *     version: 1.0
  *     desc   : Other

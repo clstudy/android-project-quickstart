@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * <pre>
  *     author : jacks
- *     e-mail : chenlong5@ffcs.cn
+ *     e-mail : 363525749@qq.com
  *     time   : 2019/12/06
  *     version: 1.0
  *     desc   : demo，可自行删掉。不依赖mvp，单独使用网络库

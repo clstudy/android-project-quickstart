@@ -5,7 +5,7 @@ import android.content.Context;
 /**
  * <pre>
  *     author : jacks
- *     e-mail : chenlong5@ffcs.cn
+ *     e-mail : 363525749@qq.com
  *     time   : 2020/02/10
  *     version: 1.0
  *     desc   : 屏幕显示工具

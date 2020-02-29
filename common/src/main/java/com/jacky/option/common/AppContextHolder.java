@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * <pre>
  *     author : jacks
- *     e-mail : chenlong5@ffcs.cn
+ *     e-mail : 363525749@qq.com
  *     time   : 2020/02/10
  *     version: 1.0
  *     desc   : 全局{@link android.app.Application}上下文实例。

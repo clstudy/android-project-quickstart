@@ -1,5 +1,8 @@
 package com.jacky.option.architecture.base;
 
+import android.os.Bundle;
+import android.view.ViewGroup;
+
 import com.jacky.option.framework.mvp.BasePresenter;
 
 /**
@@ -19,5 +22,15 @@ public class NoPresenterFragment extends BaseSupportFragment<BasePresenter> {
     @Override
     protected BasePresenter createPresenter() {
         return null;
+    }
+
+    @Override
+    protected int onSetLayoutRes() {
+        return 0;
+    }
+
+    @Override
+    protected void onMyViewCreated(ViewGroup container, Bundle savedInstanceState) {
+
     }
 }

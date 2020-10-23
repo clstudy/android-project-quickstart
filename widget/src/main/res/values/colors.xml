@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#282828</color>
+    <color name="divide_line">#dcdddd</color>
+    <color name="divide_line_content">#F8F8F9</color>
+
+</resources>

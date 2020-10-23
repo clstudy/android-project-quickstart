@@ -38,8 +38,14 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
             mPresenter = createPresenter();
             mPresenter.attachView(this);
         }
+        View viewCreated = onCreateMyView(inflater,container,savedInstanceState);
+        if (viewCreated != null) {
+            return viewCreated;
+        }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+    protected abstract View onCreateMyView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     @Override
     public void onDestroyView() {

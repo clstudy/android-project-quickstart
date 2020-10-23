@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@android:color/holo_blue_light"
+    tools:layout_height="56dp"
+    tools:layout_marginLeft="40dp"
+    tools:layout_marginTop="40dp"
+    tools:layout_width="80dp">
+
+    <View
+        android:id="@+id/tab_divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divide_line"/>
+
+    <View
+        android:id="@+id/tab_divider_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:background="@color/colorAccent"
+        android:visibility="gone"
+        tools:layout_width="40dp"
+        tools:visibility="visible"/>
+
+    <RelativeLayout
+        android:id="@+id/content_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/tab_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:id="@+id/tab_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tab_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="9.0sp"
+            tools:text="首页"/>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tab_msg_number"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/shape_oval_fill_dot_red"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        tools:text="99"
+        tools:visibility="visible"/>
+</RelativeLayout>

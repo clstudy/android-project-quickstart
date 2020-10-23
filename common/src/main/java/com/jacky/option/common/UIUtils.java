@@ -2,6 +2,9 @@ package com.jacky.option.common;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
@@ -32,6 +35,15 @@ public class UIUtils {
 
     public static String getStringByResId(@StringRes int resId) {
         return getContext().getString(resId);
+    }
+
+    @ColorInt
+    public static int getAttrColor(Context context, int attr) {
+        int[] attrs = new int[]{attr};
+        TypedArray ta = context.obtainStyledAttributes(attrs);
+        int ans = ta.getColor(0, Color.BLACK);
+        ta.recycle();
+        return ans;
     }
 
     /**
